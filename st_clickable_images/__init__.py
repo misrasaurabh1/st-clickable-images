@@ -5,7 +5,8 @@ _RELEASE = True
 
 if not _RELEASE:
     _component_func = components.declare_component(
-        "clickable_images", url="http://localhost:3001",
+        "clickable_images",
+        url="http://localhost:3001",
     )
 else:
     parent_dir = os.path.dirname(os.path.abspath(__file__))
@@ -15,17 +16,26 @@ else:
     )
 
 
-def clickable_images(paths, titles=[], div_style={}, img_style={}, key=None):
+def clickable_images(
+    paths,
+    titles=[],
+    div_style={},
+    img_style={},
+    container_div_style={},
+    img_div_style={},
+    text_div_style={},
+    key=None,
+):
     """Display one or several images that can be clicked on".
 
     Parameters
     ----------
     paths: list
         The list of URLS of the images
-    
+
     titles: list
         The (optional) titles of the images
-    
+
     div_style: dict
         A dict with the CSS property/value pairs for the div container
 
@@ -48,6 +58,9 @@ def clickable_images(paths, titles=[], div_style={}, img_style={}, key=None):
         titles=titles,
         div_style=div_style,
         img_style=img_style,
+        container_div_style=container_div_style,
+        img_div_style=img_div_style,
+        text_div_style=text_div_style,
         key=key,
         default=-1,
     )

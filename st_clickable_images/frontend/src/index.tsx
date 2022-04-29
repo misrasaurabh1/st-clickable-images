@@ -18,7 +18,15 @@ function onRender(event: Event): void {
   // Add and style all images
   let imagesLoaded = 0
   for (let i = 0; i < data.args["paths"].length; i++) {
-    let img = div.appendChild(document.createElement("img"))
+    let container_div = div.appendChild(document.createElement("div"))
+    for (let key in data.args["container_div_style"]) {
+      container_div.style[key as any] = data.args["container_div_style"][key]
+    }
+    let img_div = container_div.appendChild(document.createElement("div"))
+    for (let key in data.args["img_div_style"]) {
+      img_div.style[key as any] = data.args["img_div_style"][key]
+    }
+    let img = img_div.appendChild(document.createElement("img"))
     for (let key in data.args["img_style"]) {
       img.style[key as any] = data.args["img_style"][key]
     }
@@ -26,7 +34,7 @@ function onRender(event: Event): void {
     if (data.args["titles"].length > i) {
       img.title = data.args["titles"][i]
     }
-    img.onclick = function (): void {
+    img_div.onclick = function (): void {
       Streamlit.setComponentValue(i)
     }
     // eslint-disable-next-line
@@ -35,6 +43,15 @@ function onRender(event: Event): void {
       if (imagesLoaded === data.args["paths"].length) {
         Streamlit.setFrameHeight()
       }
+    }
+
+    let caption = container_div.appendChild(document.createElement("div"))
+    for (let key in data.args["text_div_style"]) {
+      caption.style[key as any] = data.args["text_div_style"][key]
+    }
+    caption.textContent = data.args["titles"][i]
+    caption.onclick = function (): void {
+      Streamlit.setComponentValue(i)
     }
   }
 }
