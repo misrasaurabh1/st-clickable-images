@@ -18,7 +18,10 @@ else:
 
 def clickable_images(
     paths,
+    compare_mode=False,
     titles=[],
+    rating=[],
+    reviews=[],
     div_style={},
     img_style={},
     container_div_style={},
@@ -53,9 +56,13 @@ def clickable_images(
         The index of the last image clicked on (or -1 before any click)
 
     """
+    # print("reviews", reviews)
     component_value = _component_func(
         paths=paths,
+        compare_mode=compare_mode,
         titles=titles,
+        rating=rating,
+        reviews=reviews,
         div_style=div_style,
         img_style=img_style,
         container_div_style=container_div_style,
@@ -64,7 +71,7 @@ def clickable_images(
         key=key,
         default=-1,
     )
-
+    # print(component_value)
     return component_value
 
 
